@@ -5,12 +5,21 @@
 	"description": "Take your SIS schedule, and put it in Google Calendar.",
 	"version": "1.0",
 
+	"content_scripts": [
+		{
+			"matches": ["*://campus.rit.edu/psp/*"],
+			"js": ["linq.min.js"],
+			"run_at": "document_end"
+		}
+	],
+
 	"background": {
 		"scripts": ["incredule.js"]
-	},
+	}
+	/*,
 
 	"browser_action": {
 		"default_icon": "icon.png",
 		"default_popup": "popup.html"
-	}
+	}*/
 }
