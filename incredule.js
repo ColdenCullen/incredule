@@ -1,6 +1,6 @@
 chrome.browserAction.onClicked.addListener(function () {
 	chrome.tabs.executeScript( null, { file: "linq.min.js" }, function() {
-	
+		alert('stuffs');	
 		var jsonArray = [
 			{ "user": { "id": 100, "screen_name": "d_linq" }, "text": "to objects" },
 			{ "user": { "id": 130, "screen_name": "c_bill" }, "text": "g" },
