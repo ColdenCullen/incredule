@@ -1,5 +1,9 @@
 chrome.browserAction.onClicked.addListener(function () {
 	
+	chrome.tabs.executeScript( {
+		code: "console.log( 'Butts' );"
+	} );
+
 	var tableItems = document.getElementById( 'ptifrmtgtframe' ).contentDocument.getElementsByClassName( "PSGROUPBOXWBO" );
 	var classes = [];
 

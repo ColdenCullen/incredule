@@ -10,7 +10,7 @@
 	],
 
 	"background": {
-		"scripts": ["incredule.js"]
+		"scripts": ["background.js"]
 	},
 
 	"browser_action": {
