@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-
+	"content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
 	"name": "Incredule",
 	"description": "Take your SIS schedule, and put it in Google Calendar.",
 	"version": "1.0",
@@ -10,7 +10,7 @@
 	],
 
 	"background": {
-		"scripts": ["background.js"]
+		"page": "background.html"
 	},
 
 	"browser_action": {
