@@ -1,6 +1,4 @@
 (function() {
-	var gCalendarUrl = "https://www.googleapis.com/calendar/v3";
-
 	function Class( object ) {
 		object.startDate = new Date( object.startDate );
 		object.endDate = new Date( object.endDate );
@@ -21,7 +19,8 @@
 				for( var ii = 0; ii < classes.length; ++ii )
 					classes[ ii ] = new Class( classes[ ii ] );
 
-				console.log( classes[ 0 ]);
+				console.log( classes[ 0 ] );
+				console.log( gapi );
 			} );
 		} );
 	} );
