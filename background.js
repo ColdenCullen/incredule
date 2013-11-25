@@ -21,7 +21,7 @@
 				for( var ii = 0; ii < classes.length; ++ii )
 					classes[ ii ] = new Class( classes[ ii ] );
 
-				console.log( classes[ 0 ].startDate );
+				console.log( classes[ 0 ]);
 			} );
 		} );
 	} );

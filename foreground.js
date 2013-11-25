@@ -24,7 +24,7 @@ var Class = function( table ) {
 
 chrome.runtime.onMessage.addListener(
 function(request, sender, sendResponse) {
-
+	console.log(gapi);
 	var tableItems = document.getElementById( 'ptifrmtgtframe' )
 							 .contentDocument
 							 .getElementsByClassName( "PSGROUPBOXWBO" ),
