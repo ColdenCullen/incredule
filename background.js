@@ -6,6 +6,8 @@
 		return object;
 	}
 
+	gapi.client.setApiKey( 'KEY' );
+
 	// When you click the button...
 	chrome.browserAction.onClicked.addListener( function () {
 		// Execute our page-side script
@@ -24,4 +26,4 @@
 			} );
 		} );
 	} );
-} )();
+})();
