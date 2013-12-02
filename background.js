@@ -7,24 +7,34 @@ function Class( object ) {
 
 function load() {
     //gapi.client.setApiKey( 'KEY' );
-
     // Initialize authorization
     gapi.auth.init( function() {
         // When you click the button...
-        chrome.browserAction.onClicked.addListener( buttonClick );
+        document.getElementById('button').onclick = buttonClick;
     } );
 }
 
-function buttonClick() {
+function buttonClick( event ) {
     // Execute our page-side script
     chrome.tabs.executeScript( { file: "foreground.js" } );
     console.log(config);
+    gapi.client.setApiKey(config.api_key);
+    authorize();
+}
+
+function authorize() {
     gapi.auth.authorize( config, function( token ) {
-        console.log('authorized');
-        // Get the current tab
-        chrome.tabs.query( { active: true, currentWindow: true }, function( tabs ) {
-            chrome.tabs.sendMessage( tabs[0].id, "classes", messageResponse );
-        } );
+        if( !token ) {
+            console.log(token);
+            config.immediate = false;
+            authorize();
+            config.immediate = true;
+        } else {
+            // Get the current tab
+            chrome.tabs.query( { active: true, currentWindow: true }, function(tabs ) {
+                chrome.tabs.sendMessage( tabs[0].id, "classes", messageResponse );
+            } );
+        }
     } );
 }
 
@@ -35,9 +45,14 @@ function messageResponse( response ) {
         classes[ ii ] = new Class( classes[ ii ] );
 
     console.log( classes[ 0 ] );
-    console.log( gapi.client );
 
     gapi.client.load( 'calendar', 'v3', function() {
-        console.log( gapi.client );
+        console.log( gapi.client.calendar );
+        console.log( gapi.client.calendar
+            .calendarList.list()
+            .execute(function (response) {
+                window.open('', 'Incredule');
+                console.log(response);
+            }) );
     } );
 }
