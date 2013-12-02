@@ -20,7 +20,7 @@ function buttonClick() {
 	chrome.tabs.executeScript( { file: "foreground.js" } );
 
 	var config = {
-		client_id: "YOUR_KEY",
+		client_id: config.client_id,
 		scope: "https://www.googleapis.com/auth/calendar",
 		immediate: true
 	};
