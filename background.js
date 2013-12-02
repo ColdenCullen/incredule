@@ -1,11 +1,11 @@
+function Class( object ) {
+	object.startDate = new Date( object.startDate );
+	object.endDate = new Date( object.endDate );
+
+	return object;
+}
+
 function load() {
-	function Class( object ) {
-		object.startDate = new Date( object.startDate );
-		object.endDate = new Date( object.endDate );
-
-		return object;
-	}
-
 	//gapi.client.setApiKey( 'KEY' );
 
 	// Initialize authorization
@@ -20,11 +20,12 @@ function buttonClick() {
 	chrome.tabs.executeScript( { file: "foreground.js" } );
 
 	var config = {
-		client_id: "",
-		scope: "https://www.googleapis.com/auth/calendar"
+		client_id: "YOUR_KEY",
+		scope: "https://www.googleapis.com/auth/calendar",
+		immediate: true
 	};
 
-	gapi.auth.authorize( config, function() {
+	gapi.auth.authorize( config, function( token ) {
 		// Get the current tab
 		chrome.tabs.query( { active: true, currentWindow: true }, function( tabs ) {
 			chrome.tabs.sendMessage( tabs[0].id, "classes", messageResponse );
@@ -39,5 +40,9 @@ function messageResponse( response ) {
 		classes[ ii ] = new Class( classes[ ii ] );
 
 	console.log( classes[ 0 ] );
-	console.log( gapi );
+	console.log( gapi.client );
+
+	gapi.client.load( 'calendar', 'v3', function() {
+		console.log( gapi.client );
+	} );
 }
