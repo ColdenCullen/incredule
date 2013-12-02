@@ -1,4 +1,4 @@
-(function() {
+function load() {
 	function Class( object ) {
 		object.startDate = new Date( object.startDate );
 		object.endDate = new Date( object.endDate );
@@ -6,7 +6,7 @@
 		return object;
 	}
 
-	gapi.client.setApiKey( 'KEY' );
+	//gapi.client.setApiKey( 'KEY' );
 
 	// When you click the button...
 	chrome.browserAction.onClicked.addListener( function () {
@@ -26,4 +26,4 @@
 			} );
 		} );
 	} );
-})();
+}
