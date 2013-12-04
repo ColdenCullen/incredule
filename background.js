@@ -53,3 +53,7 @@ function messageResponse( response ) {
 		});
 	} );
 }
+
+function addItems( calendar, classes ) {
+
+}
