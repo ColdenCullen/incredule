@@ -108,20 +108,27 @@ function addItems( calendar, classes ) {
 								cur.endTime.split(':')[1],
 								0, 0);
 
+		var days = cur.days.match( /.{1,2}/g ).join(',').toUpperCase();
+		var endString = "" + cur.endDate.getFullYear() + cur.endDate.getMonth() + cur.endDate.getDate() + "T" + cur.endDate.getHours() + cur.endDate.getMinutes() + cur.endDate.getSeconds() + "-05:00";
+		var recurStr = "RRULE:FREQ=WEEKLY;UNTIL=" + endString + ";BYDAY=" + days;
+		console.log( recurStr );
+
 		var request = gapi.client.calendar.events.insert( {
 			calendarId: calendar.id,
 			resource: {
 				summary: cur.name,
 				location: cur.location,
 				start: {
-					dateTime: cur.start.toJSON()
+					dateTime: cur.start.toJSON(),
+					timeZone: calendar.timeZone
 				},
 				end: {
-					dateTime: cur.end.toJSON()
-				}/*,
+					dateTime: cur.end.toJSON(),
+					timeZone: calendar.timeZone
+				},
 				recurrence: [
-					""
-				]*/
+					recurStr
+				]
 			}
 		} ).execute( function (response) {
 			console.log( response );
