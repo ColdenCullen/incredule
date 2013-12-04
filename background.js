@@ -49,11 +49,47 @@ function messageResponse( response ) {
 					   item.accessRole == "writer";
 			} );
 
-			console.log( calendars );
+			addItems( calendars.filter( function (cal) {
+				return cal.summary == "Incredule Test";
+			} )[ 0 ], classes )
 		});
 	} );
 }
 
 function addItems( calendar, classes ) {
+	for( var ii = classes.length - 1; ii >= 0; ii-- ) {
+		var cur = classes[ ii ];
 
+		cur.start = new Date();
+		cur.start.setTime( cur.startTime );
+		cur.start.setDate( cur.startDate.getDate() );
+		cur.start.setMonth( cur.startDate.getMonth() );
+		cur.start.setYear( '2013' );
+		cur.end = new Date();
+		cur.end.setTime( cur.endTime );
+		cur.end.setDate( cur.startDate.getDate() );
+		cur.end.setMonth( cur.startDate.getMonth() );
+		cur.end.setYear( '2013' );
+
+		console.log( cur );
+
+		var request = gapi.client.calendar.events.insert( {
+			calendarId: calendar.id,
+			resource: {
+				summary: cur.name,
+				location: cur.location,
+				start: {
+					dateTime: cur.start.toJSON()
+				},
+				end: {
+					dateTime: cur.end.toJSON()
+				}/*,
+				recurrence: [
+					""
+				]*/
+			}
+		} ).execute( function (response) {
+			console.log( response );
+		} );
+	};
 }
