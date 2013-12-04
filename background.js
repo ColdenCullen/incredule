@@ -94,18 +94,19 @@ function addItems( calendar, classes ) {
 	for( var ii = classes.length - 1; ii >= 0; ii-- ) {
 		var cur = classes[ ii ];
 
-		cur.start = new Date();
-		cur.start.setTime( cur.startTime );
-		cur.start.setDate( cur.startDate.getDate() );
-		cur.start.setMonth( cur.startDate.getMonth() );
-		cur.start.setYear( '2013' );
-		cur.end = new Date();
-		cur.end.setTime( cur.endTime );
-		cur.end.setDate( cur.startDate.getDate() );
-		cur.end.setMonth( cur.startDate.getMonth() );
-		cur.end.setYear( '2013' );
+		cur.start = new Date(	cur.startDate.getFullYear(),
+								cur.startDate.getMonth(),
+								cur.startDate.getDate(),
+								cur.startTime.split(':')[0],
+								cur.startTime.split(':')[1],
+								0, 0);
 
-		console.log( cur );
+		cur.end = new Date(		cur.startDate.getFullYear(),
+								cur.startDate.getMonth(),
+								cur.startDate.getDate(),
+								cur.endTime.split(':')[0],
+								cur.endTime.split(':')[1],
+								0, 0);
 
 		var request = gapi.client.calendar.events.insert( {
 			calendarId: calendar.id,
