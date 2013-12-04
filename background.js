@@ -50,8 +50,28 @@ function messageResponse( response ) {
 			} );
 
 			console.log( calendars );
+            populatePopup(calendars);
 		});
 	} );
+}
+
+function populatePopup( calendars ) {
+    console.log('calendars', calendars);
+    var html = '<ul class="calendar-list">',
+        i = 0;
+    calendars.forEach( function ( calendar ) {
+        html += '<li>';
+        html += '<div class="color" style="background-color:' 
+            + calendar.backgroundColor  + ';"></div>';
+        html += '<button id="' + i + '">Use Calendar</button>';
+        html += '<h3>' + calendar.summary + '</h3>';
+        if( calendar.description )
+            html += '<p>' + calendar.description + '</p>';
+        html += '</li>';
+    });
+    html += '</ul>';
+    console.log(html);
+    document.querySelector('#content').innerHTML = html;
 }
 
 function addItems( calendar, classes ) {
