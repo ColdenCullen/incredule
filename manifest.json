@@ -1,12 +1,12 @@
 {
 	"manifest_version": 2,
-"content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+	"content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
 	"name": "Incredule",
 	"description": "Take your SIS schedule, and put it in Google Calendar.",
 	"version": "1.0",
 
 	"permissions": [
-		"tabs", "http://*/*", "https://*/*"
+		"tabs", "https://campus.rit.edu/*"
 	],
 
 	"browser_action": {
