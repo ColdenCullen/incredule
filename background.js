@@ -129,7 +129,7 @@ function addItems( calendar, classes ) {
 
 		var days = cur.days.match( /.{1,2}/g ).join(',').toUpperCase();
 		var endString = "" + cur.endDate.getFullYear() + cur.endDate.getMonth() + cur.endDate.getDate() + "T" + cur.endDate.getHours() + cur.endDate.getMinutes() + cur.endDate.getSeconds() + "-05:00";
-		var recurStr = "RRULE:FREQ=WEEKLY;UNTIL=" + endString + ";BYDAY=" + days;
+		var recurStr = "RRULE:FREQ=WEEKLY;TZID=" + calendar.timeZone + ";UNTIL=" + endString + ";BYDAY=" + days;
 		console.log( recurStr );
 
 		var request = gapi.client.calendar.events.insert( {
