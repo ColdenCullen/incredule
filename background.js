@@ -52,7 +52,6 @@ function messageResponse( response ) {
 					   item.accessRole == "writer";
 			} );
 
-			console.log( calendars );
             populatePopup();
 /* 
             addItems( calendars.filter( function (cal) {
@@ -64,7 +63,6 @@ function messageResponse( response ) {
 }
 
 function populatePopup() {
-    console.log('calendars', calendars);
     var html = '<ul class="calendar-list">',
         i = 0;
     calendars.forEach( function ( calendar ) {
@@ -79,7 +77,6 @@ function populatePopup() {
         i++;
     });
     html += '</ul>';
-    console.log(html);
     document.querySelector('#content').innerHTML = html;
     for (var i = 0; i < calendars.length; i++) {
         document.getElementById(i).onclick = getCalendar;
@@ -92,20 +89,42 @@ function getCalendar( event ) {
 
 function addItems( calendar, classes ) {
 	for( var ii = classes.length - 1; ii >= 0; ii-- ) {
+        console.log(cur);
 		var cur = classes[ ii ];
+
+        var startHr = cur.startTime.split(':')[0],
+            startMin = cur.startTime.split(':')[1];
+        console.log(startHr, startMin);
+        if (startMin.indexOf('PM') !== -1) {
+            startMin = startMin.split('PM')[0];
+            startHr = (parseInt(startHr) % 12) + 12
+            console.log(startHr);
+        } else {
+            startMin = startMin.split('AM')[0];
+        }
+
+        var endHr = cur.endTime.split(':')[0],
+            endMin = cur.endTime.split(':')[1];
+
+        if (endMin.indexOf('PM') !== -1) {
+            endMin = endMin.split('PM')[0];
+            endHr = (parseInt(endHr) % 12) + 12;
+        } else {
+            endMin = endMin.split('AM')[0];
+        }
 
 		cur.start = new Date(	cur.startDate.getFullYear(),
 								cur.startDate.getMonth(),
 								cur.startDate.getDate(),
-								cur.startTime.split(':')[0],
-								cur.startTime.split(':')[1],
+								startHr,
+								startMin,
 								0, 0);
 
 		cur.end = new Date(		cur.startDate.getFullYear(),
 								cur.startDate.getMonth(),
 								cur.startDate.getDate(),
-								cur.endTime.split(':')[0],
-								cur.endTime.split(':')[1],
+								endHr,
+                                endMin,
 								0, 0);
 
 		var days = cur.days.match( /.{1,2}/g ).join(',').toUpperCase();
